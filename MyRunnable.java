@@ -26,16 +26,7 @@ public class MyRunnable implements Runnable {
     public void  run(){
         
     try (BufferedReader br = new BufferedReader(new FileReader("numbers.txt"))) {
-    //     String line;
-    //     int i = 0;
-    //     while ((line = br.readLine()) != null) {
-    //     // System.out.println(line);
-    //         i++;
-        
-        
-    //   }
-
-    //   System.out.println(i);
+    
         String line;
         int lineNumber = 1;
         
@@ -68,34 +59,36 @@ public class MyRunnable implements Runnable {
 
 
 
-
-
-
     } 
     catch (IOException e) {
       System.out.println("Error reading file.");
     }
 
 
-         
+}
 
+
+
+
+
+    public int getPositiveCount() {
+    return positiveCount;
+            }
+
+    public int getNegativeCount() {
+        return negativeCount;
+            }
+
+    public int getZeroCount() {
+        return zeroCount;
+            }
+
+    
         
-
-                public int getPositiveCount() {
-            return positiveCount;
-        }
-
-            public int getNegativeCount() {
-                return negativeCount;
-            }
-
-            public int getZeroCount() {
-                return zeroCount;
-            }
-
-    }
-
 
     
 
-}
+        }
+
+
+

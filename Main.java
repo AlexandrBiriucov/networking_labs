@@ -17,7 +17,7 @@ public class Main {
 
 
     //  }
- 
+        Task1Logic.threadRun();
     
 
 

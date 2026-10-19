@@ -12,9 +12,9 @@ public class Task1Logic {
 //1, 2, 4, 8, 16, 32 and 64    
 
 static int totalLines;
-int totalPositive;
-int totalNegative;
-int zeros;
+static int totalPositive;
+static int totalNegative;
+static int zeros;
 
 
     public static void countLines(){
@@ -79,10 +79,10 @@ int zeros;
     //         Thread thread = threadManager.createThread();
     //         thread.start();
 
-    ArrayList<Thread> threadList = new ArrayList<>();
+    ArrayList<ManagedThread> threadList = new ArrayList<>();
     int arr[] = {1, 2, 4, 8, 16, 32, 64};
     int partitions[] = filePartitions();
-    HashMap<Integer,Integer> threadsToPartitionHashMap = new HashMap<>();
+    // HashMap<Integer,Integer> threadsToPartitionHashMap = new HashMap<>();
         // ThreadManager.getThreads(totalLines)
 
         // for(int i =0 ; i < arr.length;i++){
@@ -103,29 +103,47 @@ int zeros;
 
 
             long start = System.nanoTime();
-            for(Thread thread : threadList){
-                thread.start();
-                totalPositive+=thread.getPositiveCount(); 
+            for(ManagedThread managedThread : threadList){
+                managedThread.getThread().start();
                 
             }
-            for (Thread thread : threadList){
+            for (ManagedThread managedThread : threadList){
                 try{
-                    thread.join();
+                    managedThread.getThread().join();
                     
                 }
-
-                
-
-
-
 
                 catch(InterruptedException e){
                     Thread.currentThread().interrupt();;
                     return;
 
-
                 }
+                
             }
+           
+            totalPositive = 0;
+            totalNegative = 0;
+            zeros = 0;
+
+
+            for ( ManagedThread managedThread : threadList){
+
+                totalPositive+=managedThread.getTask().getPositiveCount();
+                totalNegative+=managedThread.getTask().getNegativeCount();
+                zeros+=managedThread.getTask().getZeroCount();
+
+
+            }
+            
+            long end= System.nanoTime();
+            long time_execution_took= end-start;
+            System.out.println("total positive " + totalPositive);
+            System.out.println("total negative " +totalNegative);
+            System.out.println("total zeros " +zeros);
+            System.out.println("time taken for " + j + "threds" + "is " + time_execution_took / 1_000_000.0 + " ms");
+
+
+
             
         }
 
