@@ -11,7 +11,7 @@ public class ManagedThread {
         thread = new Thread(task);
     }
 
-
+    
 
     public Thread getThread() {
         return thread;
