@@ -1,4 +1,4 @@
-package lab2.task1;
+package lab2.task1.client;
 
 import java.io.IOException;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package lab2.task1;
+package lab2.task1.client;
 import java.net.*;
 import java.io.*;
 public class Client {
@@ -21,11 +21,11 @@ public class Client {
 
     }
 
-    // public void requestMenu(String){
+        public String requestMenu() throws IOException{
+            return sendMessage("MENU");
+             
+        }
 
-        
-
-    // }
 
 
 

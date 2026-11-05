@@ -1,4 +1,4 @@
-package lab2.task1;
+package lab2.task1.server;
 import java.net.*;
 import java.util.Scanner;
 import java.io.*;
@@ -7,31 +7,47 @@ import java.io.*;
 public class Server {
     
     private ServerSocket serverSocket;
-    private Socket clientSocket;
+    // private Socket clientSocket;
     private BufferedReader in;
     private PrintWriter out;
     
-     public void start (int port) throws IOException {
+    public void start (int port) throws IOException {
         serverSocket = new ServerSocket(port);
-        clientSocket = serverSocket.accept();
-        System.out.println("Server : connection aquired" + clientSocket.getLocalPort());
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-        String greeting = in.readLine();
-            if ("hello server".equals(greeting)) {
-                out.println("hello client");
-            }
-            else {
-                out.println("unrecognised greeting");
-            }
-    }
+        while (true ){
+
+            
+            Socket clientSocket = serverSocket.accept();
+            // ClientHandler clientHandler = new ClientHandler(clientSocket);
+            try {
+            ClientHandler handler = new ClientHandler(clientSocket);
+            } 
+            catch (IOException e) {
+            e.printStackTrace();
+                }
+            
+
+
+
+        }
+
+        // System.out.println("Server : connection aquired" + clientSocket.getLocalPort());
+        // out = new PrintWriter(clientSocket.getOutputStream(), true);
+        // in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+
+
+        
+
+            
+
+        }
 
 
      public void stop() throws IOException {
         in.close();
         out.close();
-        clientSocket.close();
+        // clientSocket.close();
         serverSocket.close();
     }
 
