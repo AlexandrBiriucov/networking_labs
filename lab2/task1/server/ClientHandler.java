@@ -13,12 +13,12 @@ public class ClientHandler {
     private Socket clientSocket;
     private BufferedReader in;
     private PrintWriter out;
-    public ClientHandler(Socket clienSocket) throws IOException{
+    public ClientHandler(Socket clientSocket) throws IOException{
 
-        this.clientSocket=clientSocket;
+        this.clientSocket= clientSocket;
         
-        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        PrintWriter out = new PrintWriter(clienSocket.getOutputStream(), true);
+         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        this.out = new PrintWriter(clientSocket.getOutputStream(), true);
 
 
     }
@@ -27,12 +27,15 @@ public class ClientHandler {
 
         while (true){
             String request = in.readLine();
-            if (in ==null){
+            if (request ==null){
                 break;
             }                    
+        System.out.println("server gets a request" +  " " +request);
+        RequestHandler requestHandler = new RequestHandler();
+         String requestedString = requestHandler.handleRequest(request);
+         
+         out.println(requestedString);
         
-        RequestHandlder requestHandler = new RequestHandlder();
-         requestHandler.handleRequest(request);   
 
             
 

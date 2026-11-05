@@ -12,15 +12,21 @@ public class Server {
     private PrintWriter out;
     
     public void start (int port) throws IOException {
-        serverSocket = new ServerSocket(port);
 
-        while (true ){
+        serverSocket = new ServerSocket(port);
+        System.out.println("Server working on a port : "+ serverSocket.getLocalPort());
+
+        while (true){
 
             
             Socket clientSocket = serverSocket.accept();
+            System.out.println("connection was made" + clientSocket.getLocalSocketAddress());
             // ClientHandler clientHandler = new ClientHandler(clientSocket);
             try {
             ClientHandler handler = new ClientHandler(clientSocket);
+            handler.handleClient();
+                
+
             } 
             catch (IOException e) {
             e.printStackTrace();
@@ -52,36 +58,36 @@ public class Server {
     }
 
 
-    public static void main(String[] args) {
-        System.out.println("enter the port number for example 6666");
-        Scanner sc = new Scanner(System.in);
-        int port = sc.nextInt();
-        sc.nextLine();
-        // sc.nextLine();
-        System.out.println(port);
-        // System.out.println("Hello World");
-        Server server = new Server();
+    // public static void main(String[] args) {
+    //     System.out.println("enter the port number for example 6666");
+    //     Scanner sc = new Scanner(System.in);
+    //     int port = sc.nextInt();
+    //     sc.nextLine();
+    //     // sc.nextLine();
+    //     System.out.println(port);
+    //     // System.out.println("Hello World");
+    //     Server server = new Server();
 
-        try {
-        server.start(port);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+    //     try {
+    //     server.start(port);
+    //     }
+    //     catch (IOException e){
+    //         e.printStackTrace();
+    //     }
         
 
-        try{
-            server.stop();
-        }
+    //     try{
+    //         server.stop();
+    //     }
 
-        catch (IOException e){
-            e.printStackTrace();
-        }
+    //     catch (IOException e){
+    //         e.printStackTrace();
+    //     }
 
         
 
 
-    }
+    // }
 
 
 
