@@ -27,7 +27,10 @@ public class Menu {
         // return String.valueOf(PRODUCTS); 
 
     }
+    public static List<Product> getProductList(){
+        return PRODUCTS;
 
+    }
         
 
 

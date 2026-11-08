@@ -23,7 +23,9 @@ public class Main {
         else if (args[0].equals("client")){
             Client client = new Client();
             client.startConnection(address , port);
-            client.run();
+            client.startListener();
+            // client.run();
+            client.testOrder();
             
 
 

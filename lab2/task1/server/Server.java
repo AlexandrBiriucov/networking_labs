@@ -1,6 +1,9 @@
 package lab2.task1.server;
 import java.net.*;
 import java.util.Scanner;
+
+import lab2.task1.orderPreparation.OrderManager;
+
 import java.io.*;
 
 
@@ -10,11 +13,19 @@ public class Server {
     // private Socket clientSocket;
     private BufferedReader in;
     private PrintWriter out;
-    
-    public void start (int port) throws IOException {
+    private Stock stock;
 
+    public void start (int port) throws IOException {
+        System.out.println("###SERVER###"); 
         serverSocket = new ServerSocket(port);
         System.out.println("Server working on a port : "+ serverSocket.getLocalPort());
+        
+        stock = new Stock(); 
+        System.out.println("Stock was created " + stock.getStock());
+
+
+        OrderManager orderManager = new OrderManager();
+        orderManager.startWorkers();
 
         while (true){
 
@@ -23,7 +34,7 @@ public class Server {
             System.out.println("connection was made" + clientSocket.getLocalSocketAddress());
             // ClientHandler clientHandler = new ClientHandler(clientSocket);
             try {
-            ClientHandler handler = new ClientHandler(clientSocket);
+            ClientHandler handler = new ClientHandler(clientSocket,stock,orderManager);
             handler.handleClient();
                 
 
