@@ -15,8 +15,9 @@ public class Server {
     private PrintWriter out;
     private Stock stock;
 
-    public void start (int port) throws IOException {
-        System.out.println("###SERVER###"); 
+    public void start (int port) throws IOException  {
+        System.out.println("###SERVER###");
+         
         serverSocket = new ServerSocket(port);
         System.out.println("Server working on a port : "+ serverSocket.getLocalPort());
         
